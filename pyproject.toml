@@ -1,5 +1,5 @@
 [project]
-name = "mcp-echo"
+name = "mcp-echo-derek"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -10,7 +10,7 @@ dependencies = [
 ]
 
 [project.scripts]
-mcp-echo = "mcp_echo:main"
+mcp-echo-derek = "mcp_echo_derek:main"
 
 [tool.uv]
 package = true

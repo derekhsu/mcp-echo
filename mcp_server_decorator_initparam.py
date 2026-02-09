@@ -19,7 +19,6 @@ import os
 from typing import Tuple
 from pydantic import Field
 from fastmcp import FastMCP
-from fastmcp.server.http import create_streamable_http_app
 from fastmcp.server.dependencies import get_http_request, get_context
 from fastmcp.server import Context
 
@@ -80,10 +79,7 @@ def build_app(prefix: str | None = None) -> Tuple[FastMCP, object]:
             return {"message": f"{prefix_val}{message}"}
         return {"message": message}
 
-    # Expose app with streamable HTTP path
-    app = create_streamable_http_app(mcp, "/stream")
-
-    return mcp, app
+    return mcp, mcp
 
 
 # Module-level default using environment variable at import time

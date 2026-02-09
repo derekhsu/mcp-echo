@@ -1,4 +1,4 @@
-# mcp-echo ✅
+# mcp-echo-derek ✅
 
 A minimal FastMCP server that exposes an `echo` tool which returns the user's message verbatim.
 

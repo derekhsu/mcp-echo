@@ -87,11 +87,21 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Run mcp_server_decorator_initparam")
     parser.add_argument("--prefix", help="Startup PREFIX to prepend (overrides env)", default=None)
+    parser.add_argument(
+        "--transport",
+        choices=["stdio", "http"],
+        default="http",
+        help="Run over stdio or HTTP streamable (default: http)",
+    )
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8080)
     args = parser.parse_args()
 
     server_mcp, server_app = build_app(prefix=args.prefix)
+
+    if args.transport == "stdio":
+        server_mcp.run(transport="stdio")
+        return
 
     reload_enabled = os.getenv("UVICORN_RELOAD", "0") == "1"
     uvicorn.run(server_app, host=args.host, port=args.port, reload=reload_enabled)
