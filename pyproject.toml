@@ -5,5 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "debugpy>=1.8.20",
     "fastmcp>=2.14.4",
 ]
+
+[project.scripts]
+mcp-echo = "mcp_echo:main"
+
+[tool.uv]
+package = true

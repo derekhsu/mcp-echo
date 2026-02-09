@@ -10,6 +10,23 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
-        }
+        },
+        {
+            "name": "FastMCP HTTP-Streamable Debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/mcp_server_decorator_initparam.py",
+            "args": [
+                "--host",
+                "127.0.0.1",
+                "--port",
+                "8080"
+            ],
+            "env": {
+                "UVICORN_RELOAD": "0"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }        
     ]
 }

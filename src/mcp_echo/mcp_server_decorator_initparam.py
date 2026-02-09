@@ -1,17 +1,8 @@
-"""FastMCP server with initialization parameter support for PREFIX.
+"""Packaged copy of mcp_server_decorator_initparam.py used as library core.
 
-Supports reading PREFIX from (priority order):
-1. HTTP Header `PREFIX` (per-request)
-2. Server startup parameter passed to `build_app(prefix=...)`
-3. Environment variable `PREFIX`
-
-The PREFIX value (if present) is prepended to the echoed message in the `echo` tool.
-
-The module exposes:
-- build_app(prefix: str | None = None) -> tuple[FastMCP, ASGI app]
-- mcp, app: default instances using environment variable at import time
-
-Run as a script to start a dev server that accepts --prefix.
+This file is a copy of the project's root `mcp_server_decorator_initparam.py`
+kept inside the package so the package is runnable/installed while preserving
+the original file at repository root unchanged.
 """
 from __future__ import annotations
 
@@ -96,21 +87,11 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Run mcp_server_decorator_initparam")
     parser.add_argument("--prefix", help="Startup PREFIX to prepend (overrides env)", default=None)
-    parser.add_argument(
-        "--transport",
-        choices=["stdio", "http"],
-        default="http",
-        help="Run over stdio or HTTP streamable (default: http)",
-    )
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8080)
     args = parser.parse_args()
 
     server_mcp, server_app = build_app(prefix=args.prefix)
-
-    if args.transport == "stdio":
-        server_mcp.run()
-        return
 
     reload_enabled = os.getenv("UVICORN_RELOAD", "0") == "1"
     uvicorn.run(server_app, host=args.host, port=args.port, reload=reload_enabled)
